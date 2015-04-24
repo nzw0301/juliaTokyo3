@@ -15,23 +15,17 @@ function biPartSimRank(x::Int64, y::Int64, mat::SparseMatrixCSC)
     
     adj = normalized_adjMat(mat)
     adj_t = normalized_adjMat(mat')
-
     
     for k in 1:iteration
+        from_sim = c * adj_t' * to_sim * adj_t
+        for i in 1:x
+            from_sim[i;i] = 1
+        end
         
-       from_sim = c * adj_t' * to_sim * adj_t
-
-       for i in 1:x
-           from_sim[i;i] = 1
-       end
-
-
-       to_sim   = c * adj' * from_sim * adj
-
-       for i in 1:y
-           to_sim[i;i] = 1
-       end
-        
+        to_sim   = c * adj' * from_sim * adj
+        for i in 1:y
+            to_sim[i;i] = 1
+        end
         println(k)
     end
     
@@ -41,7 +35,7 @@ end
 function getDim(filename::String)
     from_set = Set()
     to_set = Set()
-
+    
     f = open(filename)
     for l in readlines(f)
         data = split(chomp(l), ",")
@@ -96,10 +90,7 @@ function writeResult(names,mat)
     end
 end
     
-
 from_sim, to_sim, from, to = biSimrank()
 
 writeResult(from,from_sim)
 writeResult(to,to_sim)
-
-

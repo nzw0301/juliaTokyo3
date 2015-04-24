@@ -1,2 +1,9 @@
-# juliaTokyo3
-JuliaTokyo#3 LT nozawa
+* JuliaTokyo#3 LT presented by nzw
+
+** 概要
+SimRank
+[[http://www-cs-students.stanford.edu/~glenj/simrank.pdf][simrank]]の2部グラフのナイーブな実装です
+
+** 入力データ
+from,targetのcsv形式を入力として与えてください
+Sampleのデータは，cake.csvです
